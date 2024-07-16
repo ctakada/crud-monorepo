@@ -1,0 +1,24 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: project_manager
+      MONGO_INITDB_ROOT_PASSWORD: fipsuz-3rywwy-rofsiT
+    volumes:
+      - './data:/data/db'
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: project_manager
+      ME_CONFIG_MONGODB_ADMINPASSWORD: fipsuz-3rywwy-rofsiT
+      ME_CONFIG_MONGODB_URL: mongodb://project_manager:localhost@mongo:27017/
+      ME_CONFIG_BASICAUTH: false
